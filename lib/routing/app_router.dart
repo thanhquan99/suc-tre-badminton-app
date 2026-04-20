@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/localization/locale_notifier.dart';
+import '../l10n/generated/app_localizations.dart';
+
 final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     initialLocation: '/',
@@ -15,17 +18,39 @@ final appRouterProvider = Provider<GoRouter>((ref) {
   );
 });
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final currentLocale = ref.watch(localeNotifierProvider);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Badminton Club'),
+        title: Text(l10n.appTitle),
+        actions: [
+          PopupMenuButton<Locale>(
+            icon: const Icon(Icons.language),
+            tooltip: l10n.languageTooltip,
+            initialValue: currentLocale,
+            onSelected: (locale) =>
+                ref.read(localeNotifierProvider.notifier).setLocale(locale),
+            itemBuilder: (_) => const [
+              PopupMenuItem(
+                value: Locale('vi'),
+                child: Text('Tiếng Việt'),
+              ),
+              PopupMenuItem(
+                value: Locale('en'),
+                child: Text('English'),
+              ),
+            ],
+          ),
+        ],
       ),
-      body: const Center(
-        child: Text('Welcome to Badminton Club Tracker'),
+      body: Center(
+        child: Text(l10n.homeWelcome),
       ),
     );
   }

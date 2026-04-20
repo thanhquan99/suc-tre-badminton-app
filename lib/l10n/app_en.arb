@@ -1,0 +1,15 @@
+{
+  "@@locale": "en",
+  "appTitle": "Badminton Club",
+  "@appTitle": {
+    "description": "Application title shown in the AppBar and OS task switcher"
+  },
+  "homeWelcome": "Welcome to Badminton Club Tracker",
+  "@homeWelcome": {
+    "description": "Welcome message on the HomeScreen body"
+  },
+  "languageTooltip": "Language",
+  "@languageTooltip": {
+    "description": "Tooltip for the globe icon that opens the language switcher"
+  }
+}

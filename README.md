@@ -26,12 +26,21 @@ lib/
 ├── core/
 │   ├── constants/
 │   │   └── api_constants.dart        # Base URL, timeouts
+│   ├── localization/
+│   │   ├── supported_locales.dart    # Supported locales + matcher
+│   │   ├── locale_preference.dart    # SharedPreferences read/write
+│   │   ├── initial_locale.dart       # Resolution: saved → device → fallback
+│   │   └── locale_notifier.dart      # Riverpod notifier for current locale
 │   ├── network/
 │   │   ├── dio_client.dart           # Dio configuration + interceptors
 │   │   └── api_exceptions.dart       # Custom exception classes
 │   └── theme/
 │       └── app_theme.dart            # ThemeData
 ├── features/                         # Feature modules (one folder per feature)
+├── l10n/
+│   ├── app_en.arb                    # English translations (template)
+│   ├── app_vi.arb                    # Vietnamese translations
+│   └── generated/                    # Generated AppLocalizations (gen-l10n)
 ├── routing/
 │   └── app_router.dart               # GoRouter route definitions
 └── shared/
@@ -71,6 +80,11 @@ features/
    ```bash
    dart run build_runner build --delete-conflicting-outputs
    ```
+
+   Note: `gen-l10n` (for `lib/l10n/generated/app_localizations.dart`) runs
+   automatically during `flutter pub get` and any `flutter run` / `flutter build`
+   because `generate: true` is set in `pubspec.yaml`. If you need to regenerate
+   it explicitly, run `flutter gen-l10n`.
 
 3. Run the app:
    ```bash
