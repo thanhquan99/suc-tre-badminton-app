@@ -16,4 +16,42 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get languageTooltip => 'Ngôn ngữ';
+
+  @override
+  String get loginTitle => 'Đăng nhập';
+
+  @override
+  String get usernameLabel => 'Tên đăng nhập';
+
+  @override
+  String get passwordLabel => 'Mật khẩu';
+
+  @override
+  String get loginButton => 'Đăng nhập';
+
+  @override
+  String get loginErrorInvalidCredentials =>
+      'Tên đăng nhập hoặc mật khẩu không đúng';
+
+  @override
+  String get loginErrorGeneric => 'Đã xảy ra lỗi. Vui lòng thử lại.';
+
+  @override
+  String get usernameValidation =>
+      'Dùng 3-30 ký tự thường, số, \'.\', \'_\' hoặc \'-\'';
+
+  @override
+  String get passwordValidation => 'Vui lòng nhập mật khẩu';
+
+  @override
+  String get logoutTooltip => 'Đăng xuất';
+
+  @override
+  String get roleAdmin => 'Quản trị viên';
+
+  @override
+  String get roleManager => 'Quản lý';
+
+  @override
+  String get roleMember => 'Thành viên';
 }

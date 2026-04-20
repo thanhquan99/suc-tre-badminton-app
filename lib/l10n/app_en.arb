@@ -11,5 +11,53 @@
   "languageTooltip": "Language",
   "@languageTooltip": {
     "description": "Tooltip for the globe icon that opens the language switcher"
+  },
+  "loginTitle": "Sign in",
+  "@loginTitle": {
+    "description": "Title of the login screen"
+  },
+  "usernameLabel": "Username",
+  "@usernameLabel": {
+    "description": "Label for the username input field on the login screen"
+  },
+  "passwordLabel": "Password",
+  "@passwordLabel": {
+    "description": "Label for the password input field on the login screen"
+  },
+  "loginButton": "Sign in",
+  "@loginButton": {
+    "description": "Submit button on the login screen"
+  },
+  "loginErrorInvalidCredentials": "Invalid username or password",
+  "@loginErrorInvalidCredentials": {
+    "description": "Error shown when the server rejects login credentials"
+  },
+  "loginErrorGeneric": "Something went wrong. Please try again.",
+  "@loginErrorGeneric": {
+    "description": "Fallback error shown when login fails for non-credential reasons (network, server)"
+  },
+  "usernameValidation": "Use 3-30 lowercase letters, digits, '.', '_', or '-'",
+  "@usernameValidation": {
+    "description": "Validation hint for the username input field"
+  },
+  "passwordValidation": "Password is required",
+  "@passwordValidation": {
+    "description": "Validation hint for the password input field"
+  },
+  "logoutTooltip": "Sign out",
+  "@logoutTooltip": {
+    "description": "Tooltip for the logout icon in the HomeScreen AppBar"
+  },
+  "roleAdmin": "Admin",
+  "@roleAdmin": {
+    "description": "Role label for admin users"
+  },
+  "roleManager": "Manager",
+  "@roleManager": {
+    "description": "Role label for manager users"
+  },
+  "roleMember": "Member",
+  "@roleMember": {
+    "description": "Role label for member users"
   }
 }

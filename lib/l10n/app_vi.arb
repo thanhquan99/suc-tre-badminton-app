@@ -2,5 +2,17 @@
   "@@locale": "vi",
   "appTitle": "Câu lạc bộ Cầu lông",
   "homeWelcome": "Chào mừng đến với ứng dụng quản lý CLB Cầu lông",
-  "languageTooltip": "Ngôn ngữ"
+  "languageTooltip": "Ngôn ngữ",
+  "loginTitle": "Đăng nhập",
+  "usernameLabel": "Tên đăng nhập",
+  "passwordLabel": "Mật khẩu",
+  "loginButton": "Đăng nhập",
+  "loginErrorInvalidCredentials": "Tên đăng nhập hoặc mật khẩu không đúng",
+  "loginErrorGeneric": "Đã xảy ra lỗi. Vui lòng thử lại.",
+  "usernameValidation": "Dùng 3-30 ký tự thường, số, '.', '_' hoặc '-'",
+  "passwordValidation": "Vui lòng nhập mật khẩu",
+  "logoutTooltip": "Đăng xuất",
+  "roleAdmin": "Quản trị viên",
+  "roleManager": "Quản lý",
+  "roleMember": "Thành viên"
 }

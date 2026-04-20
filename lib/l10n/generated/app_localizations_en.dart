@@ -16,4 +16,41 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get languageTooltip => 'Language';
+
+  @override
+  String get loginTitle => 'Sign in';
+
+  @override
+  String get usernameLabel => 'Username';
+
+  @override
+  String get passwordLabel => 'Password';
+
+  @override
+  String get loginButton => 'Sign in';
+
+  @override
+  String get loginErrorInvalidCredentials => 'Invalid username or password';
+
+  @override
+  String get loginErrorGeneric => 'Something went wrong. Please try again.';
+
+  @override
+  String get usernameValidation =>
+      'Use 3-30 lowercase letters, digits, \'.\', \'_\', or \'-\'';
+
+  @override
+  String get passwordValidation => 'Password is required';
+
+  @override
+  String get logoutTooltip => 'Sign out';
+
+  @override
+  String get roleAdmin => 'Admin';
+
+  @override
+  String get roleManager => 'Manager';
+
+  @override
+  String get roleMember => 'Member';
 }

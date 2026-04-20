@@ -115,6 +115,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Language'**
   String get languageTooltip;
+
+  /// Title of the login screen
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get loginTitle;
+
+  /// Label for the username input field on the login screen
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get usernameLabel;
+
+  /// Label for the password input field on the login screen
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get passwordLabel;
+
+  /// Submit button on the login screen
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get loginButton;
+
+  /// Error shown when the server rejects login credentials
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid username or password'**
+  String get loginErrorInvalidCredentials;
+
+  /// Fallback error shown when login fails for non-credential reasons (network, server)
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get loginErrorGeneric;
+
+  /// Validation hint for the username input field
+  ///
+  /// In en, this message translates to:
+  /// **'Use 3-30 lowercase letters, digits, \'.\', \'_\', or \'-\''**
+  String get usernameValidation;
+
+  /// Validation hint for the password input field
+  ///
+  /// In en, this message translates to:
+  /// **'Password is required'**
+  String get passwordValidation;
+
+  /// Tooltip for the logout icon in the HomeScreen AppBar
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get logoutTooltip;
+
+  /// Role label for admin users
+  ///
+  /// In en, this message translates to:
+  /// **'Admin'**
+  String get roleAdmin;
+
+  /// Role label for manager users
+  ///
+  /// In en, this message translates to:
+  /// **'Manager'**
+  String get roleManager;
+
+  /// Role label for member users
+  ///
+  /// In en, this message translates to:
+  /// **'Member'**
+  String get roleMember;
 }
 
 class _AppLocalizationsDelegate
