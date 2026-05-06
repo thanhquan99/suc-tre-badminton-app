@@ -117,4 +117,36 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get createUserSuccess => 'User created';
+
+  @override
+  String get userDetailScreenTitle => 'User detail';
+
+  @override
+  String get userDetailDisplayNameLabel => 'Display name';
+
+  @override
+  String get userDetailIsActiveLabel => 'Active';
+
+  @override
+  String get userDetailSaveButton => 'Save changes';
+
+  @override
+  String get userDetailNotFound => 'User not found';
+
+  @override
+  String get userDetailLoadError => 'Failed to load user';
+
+  @override
+  String get userUpdatedSuccess => 'User updated';
+
+  @override
+  String get userUpdateErrorGeneric =>
+      'Could not update user. Please try again.';
+
+  @override
+  String get userUpdateErrorSelfDeactivate =>
+      'You can\'t deactivate your own account.';
+
+  @override
+  String get userListTileInactiveChip => 'Inactive';
 }

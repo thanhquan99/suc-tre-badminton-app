@@ -17,6 +17,7 @@ void main() {
       username: 'testuser1234',
       displayName: 'Test User',
       role: UserRole.member,
+      isActive: true,
     ),
     password: 'Xa7!pQ9m\$2vR',
   );

@@ -28,12 +28,13 @@ class FakeTokenStorage implements TokenStorage {
   }
 }
 
-AuthUser fakeUser({String role = 'admin'}) {
+AuthUser fakeUser({String role = 'admin', bool isActive = true}) {
   return AuthUser(
     id: 'u1',
     username: 'admin',
     displayName: 'Administrator',
     role: UserRole.fromJson(role),
+    isActive: isActive,
   );
 }
 

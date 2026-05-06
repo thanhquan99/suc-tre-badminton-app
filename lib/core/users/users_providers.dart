@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../shared/providers/dio_provider.dart';
+import '../auth/models/auth_user.dart';
 import '../auth/models/user_role.dart';
 import 'models/create_user_response.dart';
 import 'models/users_page.dart';
@@ -48,3 +49,37 @@ class CreateUserNotifier
 
 final createUserNotifierProvider = AsyncNotifierProvider.autoDispose<
     CreateUserNotifier, CreateUserResponse?>(CreateUserNotifier.new);
+
+final userByIdProvider =
+    FutureProvider.family.autoDispose<AuthUser, String>((ref, id) async {
+  final client = ref.watch(usersApiClientProvider);
+  return client.getUser(id);
+});
+
+class UpdateUserNotifier
+    extends AutoDisposeFamilyAsyncNotifier<AuthUser?, String> {
+  @override
+  Future<AuthUser?> build(String id) async => null;
+
+  Future<AuthUser> save({String? displayName, bool? isActive}) async {
+    final client = ref.read(usersApiClientProvider);
+    state = const AsyncValue.loading();
+    try {
+      final updated = await client.updateUser(
+        arg,
+        displayName: displayName,
+        isActive: isActive,
+      );
+      state = AsyncValue.data(updated);
+      ref.invalidate(userByIdProvider(arg));
+      ref.invalidate(usersListProvider);
+      return updated;
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
+      rethrow;
+    }
+  }
+}
+
+final updateUserNotifierProvider = AsyncNotifierProvider.autoDispose
+    .family<UpdateUserNotifier, AuthUser?, String>(UpdateUserNotifier.new);

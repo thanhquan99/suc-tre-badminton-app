@@ -34,5 +34,15 @@
   "credentialsModalCopyButton": "Sao chép",
   "credentialsModalDoneButton": "Xong",
   "credentialsCopiedSnackbar": "Đã sao chép thông tin đăng nhập",
-  "createUserSuccess": "Đã tạo người dùng"
+  "createUserSuccess": "Đã tạo người dùng",
+  "userDetailScreenTitle": "Chi tiết người dùng",
+  "userDetailDisplayNameLabel": "Tên hiển thị",
+  "userDetailIsActiveLabel": "Đang hoạt động",
+  "userDetailSaveButton": "Lưu thay đổi",
+  "userDetailNotFound": "Không tìm thấy người dùng",
+  "userDetailLoadError": "Không thể tải người dùng",
+  "userUpdatedSuccess": "Đã cập nhật người dùng",
+  "userUpdateErrorGeneric": "Không thể cập nhật người dùng. Vui lòng thử lại.",
+  "userUpdateErrorSelfDeactivate": "Bạn không thể vô hiệu hóa tài khoản của chính mình.",
+  "userListTileInactiveChip": "Đã vô hiệu"
 }

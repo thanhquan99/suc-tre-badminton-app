@@ -10,25 +10,37 @@ AuthUser fakeUser({
   String username = 'alice1234',
   String displayName = 'Alice',
   UserRole role = UserRole.member,
+  bool isActive = true,
 }) {
   return AuthUser(
     id: id,
     username: username,
     displayName: displayName,
     role: role,
+    isActive: isActive,
   );
 }
 
 class FakeUsersApiClient implements UsersApiClient {
   int createCalls = 0;
   int listCalls = 0;
+  int getCalls = 0;
+  int updateCalls = 0;
   Object? createError;
   Object? listError;
+  Object? getError;
+  Object? updateError;
   CreateUserResponse? createResult;
   UsersPage? listResult;
+  AuthUser? getResult;
+  AuthUser? updateResult;
   String? lastCreatedDisplayName;
   UserRole? lastCreatedRole;
   UsersQuery? lastListQuery;
+  String? lastGetId;
+  String? lastUpdateId;
+  String? lastUpdateDisplayName;
+  bool? lastUpdateIsActive;
 
   @override
   Future<CreateUserResponse> createUser({
@@ -58,6 +70,33 @@ class FakeUsersApiClient implements UsersApiClient {
           page: query.page,
           limit: query.limit,
           totalPages: 1,
+        );
+  }
+
+  @override
+  Future<AuthUser> getUser(String id) async {
+    getCalls++;
+    lastGetId = id;
+    if (getError != null) throw getError!;
+    return getResult ?? fakeUser(id: id);
+  }
+
+  @override
+  Future<AuthUser> updateUser(
+    String id, {
+    String? displayName,
+    bool? isActive,
+  }) async {
+    updateCalls++;
+    lastUpdateId = id;
+    lastUpdateDisplayName = displayName;
+    lastUpdateIsActive = isActive;
+    if (updateError != null) throw updateError!;
+    return updateResult ??
+        fakeUser(
+          id: id,
+          displayName: displayName ?? 'Alice',
+          isActive: isActive ?? true,
         );
   }
 }

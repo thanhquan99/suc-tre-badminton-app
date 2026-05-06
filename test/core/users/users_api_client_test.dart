@@ -113,4 +113,110 @@ void main() {
       expect(page.data, isEmpty);
     });
   });
+
+  group('getUser', () {
+    test('GETs /users/:id and parses AuthUser including isActive', () async {
+      adapter.onGet(
+        '/users/u1',
+        (server) {
+          server.reply(200, {
+            'id': 'u1',
+            'username': 'alice1',
+            'displayName': 'Alice',
+            'role': 'member',
+            'isActive': true,
+          });
+        },
+      );
+
+      final user = await client.getUser('u1');
+
+      expect(user.id, 'u1');
+      expect(user.username, 'alice1');
+      expect(user.isActive, isTrue);
+    });
+
+    test('falls back to isActive=true when field is omitted', () async {
+      adapter.onGet(
+        '/users/u2',
+        (server) {
+          server.reply(200, {
+            'id': 'u2',
+            'username': 'bob2',
+            'displayName': 'Bob',
+            'role': 'manager',
+          });
+        },
+      );
+
+      final user = await client.getUser('u2');
+      expect(user.isActive, isTrue);
+    });
+  });
+
+  group('updateUser', () {
+    test('PATCHes /users/:id with only the fields that are non-null',
+        () async {
+      adapter.onPatch(
+        '/users/u1',
+        (server) {
+          server.reply(200, {
+            'id': 'u1',
+            'username': 'alice1',
+            'displayName': 'Alice B',
+            'role': 'member',
+            'isActive': true,
+          });
+        },
+        data: {'displayName': 'Alice B'},
+      );
+
+      final user = await client.updateUser('u1', displayName: 'Alice B');
+      expect(user.displayName, 'Alice B');
+    });
+
+    test('PATCHes both displayName and isActive when both are provided',
+        () async {
+      adapter.onPatch(
+        '/users/u1',
+        (server) {
+          server.reply(200, {
+            'id': 'u1',
+            'username': 'alice1',
+            'displayName': 'Alice C',
+            'role': 'member',
+            'isActive': false,
+          });
+        },
+        data: {'displayName': 'Alice C', 'isActive': false},
+      );
+
+      final user = await client.updateUser(
+        'u1',
+        displayName: 'Alice C',
+        isActive: false,
+      );
+      expect(user.displayName, 'Alice C');
+      expect(user.isActive, isFalse);
+    });
+
+    test('PATCHes only isActive when displayName is null', () async {
+      adapter.onPatch(
+        '/users/u1',
+        (server) {
+          server.reply(200, {
+            'id': 'u1',
+            'username': 'alice1',
+            'displayName': 'Alice',
+            'role': 'member',
+            'isActive': false,
+          });
+        },
+        data: {'isActive': false},
+      );
+
+      final user = await client.updateUser('u1', isActive: false);
+      expect(user.isActive, isFalse);
+    });
+  });
 }
