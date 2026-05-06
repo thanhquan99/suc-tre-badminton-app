@@ -91,11 +91,6 @@ class _UsersSearchBarState extends State<UsersSearchBar> {
                   onSelected: (_) => _onRoleChanged(null),
                 ),
                 ChoiceChip(
-                  label: Text(l10n.roleAdmin),
-                  selected: _role == UserRole.admin,
-                  onSelected: (_) => _onRoleChanged(UserRole.admin),
-                ),
-                ChoiceChip(
                   label: Text(l10n.roleManager),
                   selected: _role == UserRole.manager,
                   onSelected: (_) => _onRoleChanged(UserRole.manager),

@@ -307,6 +307,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'User created'**
   String get createUserSuccess;
+
+  /// AppBar title for the admin user detail screen
+  ///
+  /// In en, this message translates to:
+  /// **'User detail'**
+  String get userDetailScreenTitle;
+
+  /// Label for the editable displayName field on the user detail screen
+  ///
+  /// In en, this message translates to:
+  /// **'Display name'**
+  String get userDetailDisplayNameLabel;
+
+  /// Label for the isActive switch on the user detail screen
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get userDetailIsActiveLabel;
+
+  /// Save button on the user detail screen
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get userDetailSaveButton;
+
+  /// Error message when the user detail fails with 404
+  ///
+  /// In en, this message translates to:
+  /// **'User not found'**
+  String get userDetailNotFound;
+
+  /// Error message when the user detail fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load user'**
+  String get userDetailLoadError;
+
+  /// Snackbar shown after a user is successfully updated
+  ///
+  /// In en, this message translates to:
+  /// **'User updated'**
+  String get userUpdatedSuccess;
+
+  /// Generic error when updating a user fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not update user. Please try again.'**
+  String get userUpdateErrorGeneric;
+
+  /// Error shown when an admin tries to deactivate their own account
+  ///
+  /// In en, this message translates to:
+  /// **'You can\'t deactivate your own account.'**
+  String get userUpdateErrorSelfDeactivate;
+
+  /// Chip label shown on the list tile for users with isActive=false
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get userListTileInactiveChip;
 }
 
 class _AppLocalizationsDelegate

@@ -118,4 +118,36 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get createUserSuccess => 'Đã tạo người dùng';
+
+  @override
+  String get userDetailScreenTitle => 'Chi tiết người dùng';
+
+  @override
+  String get userDetailDisplayNameLabel => 'Tên hiển thị';
+
+  @override
+  String get userDetailIsActiveLabel => 'Đang hoạt động';
+
+  @override
+  String get userDetailSaveButton => 'Lưu thay đổi';
+
+  @override
+  String get userDetailNotFound => 'Không tìm thấy người dùng';
+
+  @override
+  String get userDetailLoadError => 'Không thể tải người dùng';
+
+  @override
+  String get userUpdatedSuccess => 'Đã cập nhật người dùng';
+
+  @override
+  String get userUpdateErrorGeneric =>
+      'Không thể cập nhật người dùng. Vui lòng thử lại.';
+
+  @override
+  String get userUpdateErrorSelfDeactivate =>
+      'Bạn không thể vô hiệu hóa tài khoản của chính mình.';
+
+  @override
+  String get userListTileInactiveChip => 'Đã vô hiệu';
 }

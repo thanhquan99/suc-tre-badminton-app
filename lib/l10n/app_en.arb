@@ -143,5 +143,45 @@
   "createUserSuccess": "User created",
   "@createUserSuccess": {
     "description": "Snackbar shown after a user is created (currently unused; reserved for future UX)"
+  },
+  "userDetailScreenTitle": "User detail",
+  "@userDetailScreenTitle": {
+    "description": "AppBar title for the admin user detail screen"
+  },
+  "userDetailDisplayNameLabel": "Display name",
+  "@userDetailDisplayNameLabel": {
+    "description": "Label for the editable displayName field on the user detail screen"
+  },
+  "userDetailIsActiveLabel": "Active",
+  "@userDetailIsActiveLabel": {
+    "description": "Label for the isActive switch on the user detail screen"
+  },
+  "userDetailSaveButton": "Save changes",
+  "@userDetailSaveButton": {
+    "description": "Save button on the user detail screen"
+  },
+  "userDetailNotFound": "User not found",
+  "@userDetailNotFound": {
+    "description": "Error message when the user detail fails with 404"
+  },
+  "userDetailLoadError": "Failed to load user",
+  "@userDetailLoadError": {
+    "description": "Error message when the user detail fails to load"
+  },
+  "userUpdatedSuccess": "User updated",
+  "@userUpdatedSuccess": {
+    "description": "Snackbar shown after a user is successfully updated"
+  },
+  "userUpdateErrorGeneric": "Could not update user. Please try again.",
+  "@userUpdateErrorGeneric": {
+    "description": "Generic error when updating a user fails"
+  },
+  "userUpdateErrorSelfDeactivate": "You can't deactivate your own account.",
+  "@userUpdateErrorSelfDeactivate": {
+    "description": "Error shown when an admin tries to deactivate their own account"
+  },
+  "userListTileInactiveChip": "Inactive",
+  "@userListTileInactiveChip": {
+    "description": "Chip label shown on the list tile for users with isActive=false"
   }
 }

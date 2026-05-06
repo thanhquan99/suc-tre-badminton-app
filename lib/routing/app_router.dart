@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../core/auth/auth_notifier.dart';
 import '../core/auth/auth_state.dart';
 import '../core/auth/models/user_role.dart';
+import '../features/admin/presentation/user_detail_screen.dart';
 import '../features/admin/presentation/users_screen.dart';
 import '../features/auth/presentation/login_screen.dart';
 import '../features/auth/presentation/splash_screen.dart';
@@ -44,6 +45,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: '/admin/users',
         name: 'adminUsers',
         builder: (_, __) => const UsersScreen(),
+      ),
+      GoRoute(
+        path: '/admin/users/:id',
+        name: 'adminUserDetail',
+        builder: (_, state) =>
+            UserDetailScreen(userId: state.pathParameters['id']!),
       ),
     ],
     redirect: (context, goState) {
