@@ -115,6 +115,198 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Language'**
   String get languageTooltip;
+
+  /// Title of the login screen
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get loginTitle;
+
+  /// Label for the username input field on the login screen
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get usernameLabel;
+
+  /// Label for the password input field on the login screen
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get passwordLabel;
+
+  /// Submit button on the login screen
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get loginButton;
+
+  /// Error shown when the server rejects login credentials
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid username or password'**
+  String get loginErrorInvalidCredentials;
+
+  /// Fallback error shown when login fails for non-credential reasons (network, server)
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get loginErrorGeneric;
+
+  /// Validation hint for the username input field
+  ///
+  /// In en, this message translates to:
+  /// **'Use 3-30 lowercase letters, digits, \'.\', \'_\', or \'-\''**
+  String get usernameValidation;
+
+  /// Validation hint for the password input field
+  ///
+  /// In en, this message translates to:
+  /// **'Password is required'**
+  String get passwordValidation;
+
+  /// Tooltip for the logout icon in the HomeScreen AppBar
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get logoutTooltip;
+
+  /// Role label for admin users
+  ///
+  /// In en, this message translates to:
+  /// **'Admin'**
+  String get roleAdmin;
+
+  /// Role label for manager users
+  ///
+  /// In en, this message translates to:
+  /// **'Manager'**
+  String get roleManager;
+
+  /// Role label for member users
+  ///
+  /// In en, this message translates to:
+  /// **'Member'**
+  String get roleMember;
+
+  /// Tooltip for the people icon in the HomeScreen AppBar (admin only)
+  ///
+  /// In en, this message translates to:
+  /// **'User management'**
+  String get userManagementTooltip;
+
+  /// AppBar title for the admin users screen
+  ///
+  /// In en, this message translates to:
+  /// **'Users'**
+  String get usersScreenTitle;
+
+  /// Hint text for the search input on the admin users screen
+  ///
+  /// In en, this message translates to:
+  /// **'Search by name or username'**
+  String get usersSearchHint;
+
+  /// Option in the role filter that matches any role
+  ///
+  /// In en, this message translates to:
+  /// **'All roles'**
+  String get usersRoleFilterAll;
+
+  /// Empty-state message on the admin users list
+  ///
+  /// In en, this message translates to:
+  /// **'No users found'**
+  String get usersEmpty;
+
+  /// Error message when the users list fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load users'**
+  String get usersLoadError;
+
+  /// Pagination indicator: current page out of total pages
+  ///
+  /// In en, this message translates to:
+  /// **'Page {current} of {total}'**
+  String usersPaginationInfo(int current, int total);
+
+  /// Title of the create-user dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Create new user'**
+  String get createUserTitle;
+
+  /// Label for the displayName field in the create-user dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Display name'**
+  String get createUserDisplayNameLabel;
+
+  /// Validation message when displayName is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Display name is required'**
+  String get createUserDisplayNameValidation;
+
+  /// Label for the role selector in the create-user dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Role'**
+  String get createUserRoleLabel;
+
+  /// Submit button of the create-user dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get createUserSubmitButton;
+
+  /// Cancel button of the create-user dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get createUserCancelButton;
+
+  /// Generic error when creating a user fails
+  ///
+  /// In en, this message translates to:
+  /// **'Could not create user. Please try again.'**
+  String get createUserErrorGeneric;
+
+  /// Title of the credentials modal shown after a user is created
+  ///
+  /// In en, this message translates to:
+  /// **'User credentials'**
+  String get credentialsModalTitle;
+
+  /// Warning banner inside the credentials modal
+  ///
+  /// In en, this message translates to:
+  /// **'This password will not be shown again. Copy it now.'**
+  String get credentialsModalWarning;
+
+  /// Button that copies both username and password to the clipboard
+  ///
+  /// In en, this message translates to:
+  /// **'Copy credentials'**
+  String get credentialsModalCopyButton;
+
+  /// Button that dismisses the credentials modal
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get credentialsModalDoneButton;
+
+  /// Snackbar shown after the admin copies the credentials
+  ///
+  /// In en, this message translates to:
+  /// **'Credentials copied'**
+  String get credentialsCopiedSnackbar;
+
+  /// Snackbar shown after a user is created (currently unused; reserved for future UX)
+  ///
+  /// In en, this message translates to:
+  /// **'User created'**
+  String get createUserSuccess;
 }
 
 class _AppLocalizationsDelegate

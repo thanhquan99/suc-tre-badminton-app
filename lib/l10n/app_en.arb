@@ -11,5 +11,137 @@
   "languageTooltip": "Language",
   "@languageTooltip": {
     "description": "Tooltip for the globe icon that opens the language switcher"
+  },
+  "loginTitle": "Sign in",
+  "@loginTitle": {
+    "description": "Title of the login screen"
+  },
+  "usernameLabel": "Username",
+  "@usernameLabel": {
+    "description": "Label for the username input field on the login screen"
+  },
+  "passwordLabel": "Password",
+  "@passwordLabel": {
+    "description": "Label for the password input field on the login screen"
+  },
+  "loginButton": "Sign in",
+  "@loginButton": {
+    "description": "Submit button on the login screen"
+  },
+  "loginErrorInvalidCredentials": "Invalid username or password",
+  "@loginErrorInvalidCredentials": {
+    "description": "Error shown when the server rejects login credentials"
+  },
+  "loginErrorGeneric": "Something went wrong. Please try again.",
+  "@loginErrorGeneric": {
+    "description": "Fallback error shown when login fails for non-credential reasons (network, server)"
+  },
+  "usernameValidation": "Use 3-30 lowercase letters, digits, '.', '_', or '-'",
+  "@usernameValidation": {
+    "description": "Validation hint for the username input field"
+  },
+  "passwordValidation": "Password is required",
+  "@passwordValidation": {
+    "description": "Validation hint for the password input field"
+  },
+  "logoutTooltip": "Sign out",
+  "@logoutTooltip": {
+    "description": "Tooltip for the logout icon in the HomeScreen AppBar"
+  },
+  "roleAdmin": "Admin",
+  "@roleAdmin": {
+    "description": "Role label for admin users"
+  },
+  "roleManager": "Manager",
+  "@roleManager": {
+    "description": "Role label for manager users"
+  },
+  "roleMember": "Member",
+  "@roleMember": {
+    "description": "Role label for member users"
+  },
+  "userManagementTooltip": "User management",
+  "@userManagementTooltip": {
+    "description": "Tooltip for the people icon in the HomeScreen AppBar (admin only)"
+  },
+  "usersScreenTitle": "Users",
+  "@usersScreenTitle": {
+    "description": "AppBar title for the admin users screen"
+  },
+  "usersSearchHint": "Search by name or username",
+  "@usersSearchHint": {
+    "description": "Hint text for the search input on the admin users screen"
+  },
+  "usersRoleFilterAll": "All roles",
+  "@usersRoleFilterAll": {
+    "description": "Option in the role filter that matches any role"
+  },
+  "usersEmpty": "No users found",
+  "@usersEmpty": {
+    "description": "Empty-state message on the admin users list"
+  },
+  "usersLoadError": "Failed to load users",
+  "@usersLoadError": {
+    "description": "Error message when the users list fails to load"
+  },
+  "usersPaginationInfo": "Page {current} of {total}",
+  "@usersPaginationInfo": {
+    "description": "Pagination indicator: current page out of total pages",
+    "placeholders": {
+      "current": { "type": "int", "example": "1" },
+      "total": { "type": "int", "example": "5" }
+    }
+  },
+  "createUserTitle": "Create new user",
+  "@createUserTitle": {
+    "description": "Title of the create-user dialog"
+  },
+  "createUserDisplayNameLabel": "Display name",
+  "@createUserDisplayNameLabel": {
+    "description": "Label for the displayName field in the create-user dialog"
+  },
+  "createUserDisplayNameValidation": "Display name is required",
+  "@createUserDisplayNameValidation": {
+    "description": "Validation message when displayName is empty"
+  },
+  "createUserRoleLabel": "Role",
+  "@createUserRoleLabel": {
+    "description": "Label for the role selector in the create-user dialog"
+  },
+  "createUserSubmitButton": "Create",
+  "@createUserSubmitButton": {
+    "description": "Submit button of the create-user dialog"
+  },
+  "createUserCancelButton": "Cancel",
+  "@createUserCancelButton": {
+    "description": "Cancel button of the create-user dialog"
+  },
+  "createUserErrorGeneric": "Could not create user. Please try again.",
+  "@createUserErrorGeneric": {
+    "description": "Generic error when creating a user fails"
+  },
+  "credentialsModalTitle": "User credentials",
+  "@credentialsModalTitle": {
+    "description": "Title of the credentials modal shown after a user is created"
+  },
+  "credentialsModalWarning": "This password will not be shown again. Copy it now.",
+  "@credentialsModalWarning": {
+    "description": "Warning banner inside the credentials modal"
+  },
+  "credentialsModalCopyButton": "Copy credentials",
+  "@credentialsModalCopyButton": {
+    "description": "Button that copies both username and password to the clipboard"
+  },
+  "credentialsModalDoneButton": "Done",
+  "@credentialsModalDoneButton": {
+    "description": "Button that dismisses the credentials modal"
+  },
+  "credentialsCopiedSnackbar": "Credentials copied",
+  "@credentialsCopiedSnackbar": {
+    "description": "Snackbar shown after the admin copies the credentials"
+  },
+  "createUserSuccess": "User created",
+  "@createUserSuccess": {
+    "description": "Snackbar shown after a user is created (currently unused; reserved for future UX)"
   }
 }
