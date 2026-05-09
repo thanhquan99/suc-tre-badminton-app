@@ -120,3 +120,4 @@ flutter build ipa --release
 | `dart run build_runner watch` | Watch mode for code generation |
 | `flutter build apk` | Build Android APK |
 | `flutter build ipa` | Build iOS IPA |
+| `flutter run -d chrome` | Testing app on chrome

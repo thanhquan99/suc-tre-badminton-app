@@ -367,6 +367,246 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Inactive'**
   String get userListTileInactiveChip;
+
+  /// AppBar title for the activities calendar screen
+  ///
+  /// In en, this message translates to:
+  /// **'Activities'**
+  String get activitiesScreenTitle;
+
+  /// Tooltip for the calendar icon in the HomeScreen AppBar
+  ///
+  /// In en, this message translates to:
+  /// **'Activities'**
+  String get activitiesTooltip;
+
+  /// Agenda empty-state when the selected day has no activities
+  ///
+  /// In en, this message translates to:
+  /// **'No activities on this day'**
+  String get activitiesEmptyDay;
+
+  /// Error message when the activities list fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load activities'**
+  String get activitiesLoadError;
+
+  /// Calendar format toggle label — month view
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get activityFormatMonth;
+
+  /// Calendar format toggle label — week view
+  ///
+  /// In en, this message translates to:
+  /// **'Week'**
+  String get activityFormatWeek;
+
+  /// AppBar title for the activity create screen
+  ///
+  /// In en, this message translates to:
+  /// **'New activity'**
+  String get activityCreateTitle;
+
+  /// AppBar title for the activity edit screen
+  ///
+  /// In en, this message translates to:
+  /// **'Edit activity'**
+  String get activityEditTitle;
+
+  /// Label for the title field on the activity form
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get activityFieldTitle;
+
+  /// Label for the description field on the activity form
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get activityFieldDescription;
+
+  /// Label for the startAt picker on the activity form
+  ///
+  /// In en, this message translates to:
+  /// **'Starts at'**
+  String get activityFieldStartAt;
+
+  /// Label for the endAt picker on the activity form
+  ///
+  /// In en, this message translates to:
+  /// **'Ends at'**
+  String get activityFieldEndAt;
+
+  /// Validation message when title is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Title is required'**
+  String get activityValidationTitleRequired;
+
+  /// Validation message when endAt <= startAt
+  ///
+  /// In en, this message translates to:
+  /// **'End time must be after start time'**
+  String get activityValidationEndAfterStart;
+
+  /// Save button on the activity edit form
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get activitySaveButton;
+
+  /// Create button on the activity create form
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get activityCreateButton;
+
+  /// Snackbar shown after an activity is created
+  ///
+  /// In en, this message translates to:
+  /// **'Activity created'**
+  String get activityCreateSuccess;
+
+  /// Snackbar shown after an activity is updated
+  ///
+  /// In en, this message translates to:
+  /// **'Activity updated'**
+  String get activityUpdateSuccess;
+
+  /// Title of the delete-activity confirm dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Delete activity?'**
+  String get activityDeleteConfirmTitle;
+
+  /// Body of the delete-activity confirm dialog
+  ///
+  /// In en, this message translates to:
+  /// **'This cannot be undone.'**
+  String get activityDeleteConfirmBody;
+
+  /// Confirm button in the delete-activity dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get activityDeleteConfirmButton;
+
+  /// Cancel button in the delete-activity dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get activityDeleteCancelButton;
+
+  /// Snackbar shown after an activity is deleted
+  ///
+  /// In en, this message translates to:
+  /// **'Activity deleted'**
+  String get activityDeleteSuccess;
+
+  /// Heading of the participants section on the activity detail
+  ///
+  /// In en, this message translates to:
+  /// **'Joined ({count})'**
+  String activityDetailParticipantsHeading(int count);
+
+  /// Empty-state for the participants list
+  ///
+  /// In en, this message translates to:
+  /// **'No one has joined yet'**
+  String get activityDetailNoParticipants;
+
+  /// Caption showing who created the activity
+  ///
+  /// In en, this message translates to:
+  /// **'Created by {name}'**
+  String activityDetailCreatedBy(String name);
+
+  /// Badge label when the caller has joined
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re in'**
+  String get activityDetailJoinedBadge;
+
+  /// Badge label when the caller has not joined
+  ///
+  /// In en, this message translates to:
+  /// **'Not joined'**
+  String get activityDetailNotJoinedBadge;
+
+  /// Join button on the activity detail
+  ///
+  /// In en, this message translates to:
+  /// **'Join'**
+  String get activityDetailJoinButton;
+
+  /// Leave button on the activity detail
+  ///
+  /// In en, this message translates to:
+  /// **'Leave'**
+  String get activityDetailLeaveButton;
+
+  /// Edit button on the activity detail (admin/manager)
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get activityDetailEditButton;
+
+  /// Delete button on the activity detail (admin/manager)
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get activityDetailDeleteButton;
+
+  /// Banner shown on the activity detail when startAt is in the past
+  ///
+  /// In en, this message translates to:
+  /// **'This activity has already happened'**
+  String get activityDetailPastBanner;
+
+  /// Error message when the activity detail fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load activity'**
+  String get activityDetailLoadError;
+
+  /// Error message when the activity detail returns 404
+  ///
+  /// In en, this message translates to:
+  /// **'Activity not found'**
+  String get activityDetailNotFound;
+
+  /// Snackbar shown after a successful join
+  ///
+  /// In en, this message translates to:
+  /// **'Joined activity'**
+  String get activityJoinSuccess;
+
+  /// Snackbar shown after a successful leave
+  ///
+  /// In en, this message translates to:
+  /// **'Left activity'**
+  String get activityLeaveSuccess;
+
+  /// Error shown when the server rejects a join because the activity has started
+  ///
+  /// In en, this message translates to:
+  /// **'You can\'t join a past activity'**
+  String get activityErrorPastJoin;
+
+  /// Generic activity-action error
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get activityErrorGeneric;
+
+  /// Retry button on activity error states
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get activityRetryButton;
 }
 
 class _AppLocalizationsDelegate
