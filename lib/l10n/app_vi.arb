@@ -84,5 +84,8 @@
   "activityLeaveSuccess": "Đã rời",
   "activityErrorPastJoin": "Không thể tham gia hoạt động đã diễn ra",
   "activityErrorGeneric": "Đã xảy ra lỗi. Vui lòng thử lại.",
-  "activityRetryButton": "Thử lại"
+  "activityRetryButton": "Thử lại",
+  "navHomeLabel": "Trang chủ",
+  "navActivitiesLabel": "Hoạt động",
+  "navUsersLabel": "Người dùng"
 }

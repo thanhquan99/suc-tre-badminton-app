@@ -275,4 +275,13 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get activityRetryButton => 'Thử lại';
+
+  @override
+  String get navHomeLabel => 'Trang chủ';
+
+  @override
+  String get navActivitiesLabel => 'Hoạt động';
+
+  @override
+  String get navUsersLabel => 'Người dùng';
 }

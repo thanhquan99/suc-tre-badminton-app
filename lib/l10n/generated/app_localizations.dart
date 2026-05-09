@@ -607,6 +607,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Retry'**
   String get activityRetryButton;
+
+  /// Bottom navigation label for the home tab
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get navHomeLabel;
+
+  /// Bottom navigation label for the activities tab
+  ///
+  /// In en, this message translates to:
+  /// **'Activities'**
+  String get navActivitiesLabel;
+
+  /// Bottom navigation label for the admin users tab
+  ///
+  /// In en, this message translates to:
+  /// **'Users'**
+  String get navUsersLabel;
 }
 
 class _AppLocalizationsDelegate
