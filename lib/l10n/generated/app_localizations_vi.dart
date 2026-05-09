@@ -150,4 +150,129 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get userListTileInactiveChip => 'Đã vô hiệu';
+
+  @override
+  String get activitiesScreenTitle => 'Hoạt động';
+
+  @override
+  String get activitiesTooltip => 'Hoạt động';
+
+  @override
+  String get activitiesEmptyDay => 'Không có hoạt động trong ngày này';
+
+  @override
+  String get activitiesLoadError => 'Không thể tải hoạt động';
+
+  @override
+  String get activityFormatMonth => 'Tháng';
+
+  @override
+  String get activityFormatWeek => 'Tuần';
+
+  @override
+  String get activityCreateTitle => 'Tạo hoạt động';
+
+  @override
+  String get activityEditTitle => 'Sửa hoạt động';
+
+  @override
+  String get activityFieldTitle => 'Tiêu đề';
+
+  @override
+  String get activityFieldDescription => 'Mô tả';
+
+  @override
+  String get activityFieldStartAt => 'Bắt đầu';
+
+  @override
+  String get activityFieldEndAt => 'Kết thúc';
+
+  @override
+  String get activityValidationTitleRequired => 'Tiêu đề là bắt buộc';
+
+  @override
+  String get activityValidationEndAfterStart =>
+      'Thời gian kết thúc phải sau thời gian bắt đầu';
+
+  @override
+  String get activitySaveButton => 'Lưu';
+
+  @override
+  String get activityCreateButton => 'Tạo';
+
+  @override
+  String get activityCreateSuccess => 'Đã tạo hoạt động';
+
+  @override
+  String get activityUpdateSuccess => 'Đã cập nhật hoạt động';
+
+  @override
+  String get activityDeleteConfirmTitle => 'Xóa hoạt động?';
+
+  @override
+  String get activityDeleteConfirmBody => 'Hành động này không thể hoàn tác.';
+
+  @override
+  String get activityDeleteConfirmButton => 'Xóa';
+
+  @override
+  String get activityDeleteCancelButton => 'Hủy';
+
+  @override
+  String get activityDeleteSuccess => 'Đã xóa hoạt động';
+
+  @override
+  String activityDetailParticipantsHeading(int count) {
+    return 'Đã tham gia ($count)';
+  }
+
+  @override
+  String get activityDetailNoParticipants => 'Chưa có ai tham gia';
+
+  @override
+  String activityDetailCreatedBy(String name) {
+    return 'Tạo bởi $name';
+  }
+
+  @override
+  String get activityDetailJoinedBadge => 'Bạn đã tham gia';
+
+  @override
+  String get activityDetailNotJoinedBadge => 'Chưa tham gia';
+
+  @override
+  String get activityDetailJoinButton => 'Tham gia';
+
+  @override
+  String get activityDetailLeaveButton => 'Rời';
+
+  @override
+  String get activityDetailEditButton => 'Sửa';
+
+  @override
+  String get activityDetailDeleteButton => 'Xóa';
+
+  @override
+  String get activityDetailPastBanner => 'Hoạt động này đã diễn ra';
+
+  @override
+  String get activityDetailLoadError => 'Không thể tải hoạt động';
+
+  @override
+  String get activityDetailNotFound => 'Không tìm thấy hoạt động';
+
+  @override
+  String get activityJoinSuccess => 'Đã tham gia';
+
+  @override
+  String get activityLeaveSuccess => 'Đã rời';
+
+  @override
+  String get activityErrorPastJoin => 'Không thể tham gia hoạt động đã diễn ra';
+
+  @override
+  String get activityErrorGeneric => 'Đã xảy ra lỗi. Vui lòng thử lại.';
+
+  @override
+  String get activityRetryButton => 'Thử lại';
 }

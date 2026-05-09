@@ -149,4 +149,129 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get userListTileInactiveChip => 'Inactive';
+
+  @override
+  String get activitiesScreenTitle => 'Activities';
+
+  @override
+  String get activitiesTooltip => 'Activities';
+
+  @override
+  String get activitiesEmptyDay => 'No activities on this day';
+
+  @override
+  String get activitiesLoadError => 'Failed to load activities';
+
+  @override
+  String get activityFormatMonth => 'Month';
+
+  @override
+  String get activityFormatWeek => 'Week';
+
+  @override
+  String get activityCreateTitle => 'New activity';
+
+  @override
+  String get activityEditTitle => 'Edit activity';
+
+  @override
+  String get activityFieldTitle => 'Title';
+
+  @override
+  String get activityFieldDescription => 'Description';
+
+  @override
+  String get activityFieldStartAt => 'Starts at';
+
+  @override
+  String get activityFieldEndAt => 'Ends at';
+
+  @override
+  String get activityValidationTitleRequired => 'Title is required';
+
+  @override
+  String get activityValidationEndAfterStart =>
+      'End time must be after start time';
+
+  @override
+  String get activitySaveButton => 'Save';
+
+  @override
+  String get activityCreateButton => 'Create';
+
+  @override
+  String get activityCreateSuccess => 'Activity created';
+
+  @override
+  String get activityUpdateSuccess => 'Activity updated';
+
+  @override
+  String get activityDeleteConfirmTitle => 'Delete activity?';
+
+  @override
+  String get activityDeleteConfirmBody => 'This cannot be undone.';
+
+  @override
+  String get activityDeleteConfirmButton => 'Delete';
+
+  @override
+  String get activityDeleteCancelButton => 'Cancel';
+
+  @override
+  String get activityDeleteSuccess => 'Activity deleted';
+
+  @override
+  String activityDetailParticipantsHeading(int count) {
+    return 'Joined ($count)';
+  }
+
+  @override
+  String get activityDetailNoParticipants => 'No one has joined yet';
+
+  @override
+  String activityDetailCreatedBy(String name) {
+    return 'Created by $name';
+  }
+
+  @override
+  String get activityDetailJoinedBadge => 'You\'re in';
+
+  @override
+  String get activityDetailNotJoinedBadge => 'Not joined';
+
+  @override
+  String get activityDetailJoinButton => 'Join';
+
+  @override
+  String get activityDetailLeaveButton => 'Leave';
+
+  @override
+  String get activityDetailEditButton => 'Edit';
+
+  @override
+  String get activityDetailDeleteButton => 'Delete';
+
+  @override
+  String get activityDetailPastBanner => 'This activity has already happened';
+
+  @override
+  String get activityDetailLoadError => 'Failed to load activity';
+
+  @override
+  String get activityDetailNotFound => 'Activity not found';
+
+  @override
+  String get activityJoinSuccess => 'Joined activity';
+
+  @override
+  String get activityLeaveSuccess => 'Left activity';
+
+  @override
+  String get activityErrorPastJoin => 'You can\'t join a past activity';
+
+  @override
+  String get activityErrorGeneric => 'Something went wrong. Please try again.';
+
+  @override
+  String get activityRetryButton => 'Retry';
 }

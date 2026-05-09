@@ -24,6 +24,12 @@ class HomeScreen extends ConsumerWidget {
         title: Text(user?.displayName ?? l10n.appTitle),
         actions: [
           if (user != null) RoleBadge(role: user.role),
+          if (user != null)
+            IconButton(
+              icon: const Icon(Icons.calendar_month_outlined),
+              tooltip: l10n.activitiesTooltip,
+              onPressed: () => context.go('/activities'),
+            ),
           if (user != null && user.role == UserRole.admin)
             IconButton(
               icon: const Icon(Icons.people_outline),
