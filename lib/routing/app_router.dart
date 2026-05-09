@@ -13,6 +13,7 @@ import '../features/admin/presentation/users_screen.dart';
 import '../features/auth/presentation/login_screen.dart';
 import '../features/auth/presentation/splash_screen.dart';
 import '../features/home/presentation/home_screen.dart';
+import '../shared/widgets/main_shell.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   final refreshListenable = ValueNotifier<int>(0);
@@ -39,43 +40,90 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: 'login',
         builder: (_, __) => const LoginScreen(),
       ),
-      GoRoute(
-        path: '/',
-        name: 'home',
-        builder: (_, __) => const HomeScreen(),
-      ),
-      GoRoute(
-        path: '/admin/users',
-        name: 'adminUsers',
-        builder: (_, __) => const UsersScreen(),
-      ),
-      GoRoute(
-        path: '/admin/users/:id',
-        name: 'adminUserDetail',
-        builder: (_, state) =>
-            UserDetailScreen(userId: state.pathParameters['id']!),
-      ),
-      GoRoute(
-        path: '/activities',
-        name: 'activities',
-        builder: (_, __) => const ActivitiesScreen(),
-      ),
-      GoRoute(
-        path: '/activities/new',
-        name: 'activityNew',
-        builder: (_, __) => const ActivityFormScreen(),
-      ),
-      GoRoute(
-        path: '/activities/:id',
-        name: 'activityDetail',
-        builder: (_, state) =>
-            ActivityDetailScreen(activityId: state.pathParameters['id']!),
-      ),
-      GoRoute(
-        path: '/activities/:id/edit',
-        name: 'activityEdit',
-        builder: (_, state) =>
-            ActivityFormScreen(activityId: state.pathParameters['id']!),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) =>
+            MainShell(navigationShell: navigationShell),
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/',
+                name: 'home',
+                builder: (_, __) => const HomeScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/activities',
+                name: 'activities',
+                builder: (_, __) => const ActivitiesScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'new',
+                    name: 'activityNew',
+                    builder: (_, state) {
+                      final slotIso = state.uri.queryParameters['slot'];
+                      final dateIso = state.uri.queryParameters['date'];
+                      DateTime? prefilledDate;
+                      DateTime? prefilledStart;
+                      DateTime? prefilledEnd;
+                      if (slotIso != null) {
+                        final parsed = DateTime.tryParse(slotIso);
+                        if (parsed != null) {
+                          prefilledDate =
+                              DateTime(parsed.year, parsed.month, parsed.day);
+                          prefilledStart = parsed;
+                          prefilledEnd = parsed.add(const Duration(hours: 1));
+                        }
+                      } else if (dateIso != null) {
+                        prefilledDate = DateTime.tryParse(dateIso);
+                      }
+                      return ActivityFormScreen(
+                        prefilledDate: prefilledDate,
+                        prefilledStart: prefilledStart,
+                        prefilledEnd: prefilledEnd,
+                      );
+                    },
+                  ),
+                  GoRoute(
+                    path: ':id',
+                    name: 'activityDetail',
+                    builder: (_, state) => ActivityDetailScreen(
+                      activityId: state.pathParameters['id']!,
+                    ),
+                  ),
+                  GoRoute(
+                    path: ':id/edit',
+                    name: 'activityEdit',
+                    builder: (_, state) => ActivityFormScreen(
+                      activityId: state.pathParameters['id']!,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/admin/users',
+                name: 'adminUsers',
+                builder: (_, __) => const UsersScreen(),
+                routes: [
+                  GoRoute(
+                    path: ':id',
+                    name: 'adminUserDetail',
+                    builder: (_, state) => UserDetailScreen(
+                      userId: state.pathParameters['id']!,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
     ],
     redirect: (context, goState) {

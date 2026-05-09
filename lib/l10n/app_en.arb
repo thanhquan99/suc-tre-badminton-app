@@ -269,5 +269,11 @@
   "activityErrorGeneric": "Something went wrong. Please try again.",
   "@activityErrorGeneric": { "description": "Generic activity-action error" },
   "activityRetryButton": "Retry",
-  "@activityRetryButton": { "description": "Retry button on activity error states" }
+  "@activityRetryButton": { "description": "Retry button on activity error states" },
+  "navHomeLabel": "Home",
+  "@navHomeLabel": { "description": "Bottom navigation label for the home tab" },
+  "navActivitiesLabel": "Activities",
+  "@navActivitiesLabel": { "description": "Bottom navigation label for the activities tab" },
+  "navUsersLabel": "Users",
+  "@navUsersLabel": { "description": "Bottom navigation label for the admin users tab" }
 }

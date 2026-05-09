@@ -2,17 +2,37 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 import '../../../core/activities/activities_providers.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import 'widgets/datetime_picker_field.dart';
+import 'widgets/time_picker_field.dart';
 
+/// Activity create/edit form.
+///
+/// - `activityId == null` and no prefill → free-form create with full
+///   date+time pickers.
+/// - `activityId == null` and `prefilledDate` set → time-only create; the
+///   date is fixed (read-only) at the top. If `prefilledStart`/`prefilledEnd`
+///   are also given, those seed the time fields.
+/// - `activityId != null` → edit mode; the existing record is hydrated.
 class ActivityFormScreen extends ConsumerStatefulWidget {
-  const ActivityFormScreen({super.key, this.activityId});
+  const ActivityFormScreen({
+    super.key,
+    this.activityId,
+    this.prefilledDate,
+    this.prefilledStart,
+    this.prefilledEnd,
+  });
 
   final String? activityId;
+  final DateTime? prefilledDate;
+  final DateTime? prefilledStart;
+  final DateTime? prefilledEnd;
 
   bool get isEdit => activityId != null;
+  bool get hasPrefilledDate => prefilledDate != null;
 
   @override
   ConsumerState<ActivityFormScreen> createState() =>
@@ -36,11 +56,23 @@ class _ActivityFormScreenState extends ConsumerState<ActivityFormScreen> {
   void initState() {
     super.initState();
     if (!widget.isEdit) {
-      final now = DateTime.now();
-      _startAt = DateTime(now.year, now.month, now.day, now.hour + 1);
-      _endAt = _startAt!.add(const Duration(hours: 1));
+      final start = widget.prefilledStart ??
+          _defaultStart(widget.prefilledDate);
+      final end = widget.prefilledEnd ??
+          start.add(const Duration(hours: 1));
+      _startAt = start;
+      _endAt = end;
       _hydrated = true;
     }
+  }
+
+  static DateTime _defaultStart(DateTime? day) {
+    if (day != null) {
+      // 18:00 on the chosen date by default — typical badminton evening slot.
+      return DateTime(day.year, day.month, day.day, 18);
+    }
+    final now = DateTime.now();
+    return DateTime(now.year, now.month, now.day, now.hour + 1);
   }
 
   @override
@@ -178,9 +210,16 @@ class _ActivityFormScreenState extends ConsumerState<ActivityFormScreen> {
     String locale, {
     required bool isEdit,
   }) {
+    final timeOnly = !isEdit && widget.hasPrefilledDate;
+    final fixedDate = timeOnly ? widget.prefilledDate! : null;
+
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
+        if (fixedDate != null) ...[
+          _FixedDateBanner(date: fixedDate, locale: locale),
+          const SizedBox(height: 16),
+        ],
         TextFormField(
           controller: _titleController,
           enabled: !_saving,
@@ -206,21 +245,39 @@ class _ActivityFormScreenState extends ConsumerState<ActivityFormScreen> {
           onChanged: (_) => setState(() {}),
         ),
         const SizedBox(height: 12),
-        DateTimePickerField(
-          label: l10n.activityFieldStartAt,
-          value: _startAt,
-          enabled: !_saving,
-          locale: locale,
-          onChanged: (v) => setState(() => _startAt = v),
-        ),
-        const SizedBox(height: 12),
-        DateTimePickerField(
-          label: l10n.activityFieldEndAt,
-          value: _endAt,
-          enabled: !_saving,
-          locale: locale,
-          onChanged: (v) => setState(() => _endAt = v),
-        ),
+        if (timeOnly) ...[
+          TimePickerField(
+            label: l10n.activityFieldStartAt,
+            value: _startAt,
+            enabled: !_saving,
+            locale: locale,
+            onChanged: (v) => setState(() => _startAt = v),
+          ),
+          const SizedBox(height: 12),
+          TimePickerField(
+            label: l10n.activityFieldEndAt,
+            value: _endAt,
+            enabled: !_saving,
+            locale: locale,
+            onChanged: (v) => setState(() => _endAt = v),
+          ),
+        ] else ...[
+          DateTimePickerField(
+            label: l10n.activityFieldStartAt,
+            value: _startAt,
+            enabled: !_saving,
+            locale: locale,
+            onChanged: (v) => setState(() => _startAt = v),
+          ),
+          const SizedBox(height: 12),
+          DateTimePickerField(
+            label: l10n.activityFieldEndAt,
+            value: _endAt,
+            enabled: !_saving,
+            locale: locale,
+            onChanged: (v) => setState(() => _endAt = v),
+          ),
+        ],
         if (_startAt != null && _endAt != null && !_datesValid())
           Padding(
             padding: const EdgeInsets.only(top: 8),
@@ -247,6 +304,43 @@ class _ActivityFormScreenState extends ConsumerState<ActivityFormScreen> {
                 ),
         ),
       ],
+    );
+  }
+}
+
+class _FixedDateBanner extends StatelessWidget {
+  const _FixedDateBanner({required this.date, required this.locale});
+  final DateTime date;
+  final String locale;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final fmt = DateFormat.yMMMMEEEEd(locale);
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.primaryContainer,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          Icon(
+            Icons.event,
+            color: theme.colorScheme.onPrimaryContainer,
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              fmt.format(date),
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: theme.colorScheme.onPrimaryContainer,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

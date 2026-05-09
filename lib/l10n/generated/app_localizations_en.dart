@@ -274,4 +274,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get activityRetryButton => 'Retry';
+
+  @override
+  String get navHomeLabel => 'Home';
+
+  @override
+  String get navActivitiesLabel => 'Activities';
+
+  @override
+  String get navUsersLabel => 'Users';
 }
