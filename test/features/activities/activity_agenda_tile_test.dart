@@ -1,4 +1,5 @@
 import 'package:badminton_app/core/activities/models/activity.dart';
+import 'package:badminton_app/core/activities/models/activity_type.dart';
 import 'package:badminton_app/features/activities/presentation/widgets/activity_agenda_tile.dart';
 import 'package:badminton_app/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -19,12 +20,14 @@ void main() {
     int participantCount = 3,
     DateTime? startAt,
     DateTime? endAt,
+    ActivityType type = ActivityType.badmintonPlay,
   }) {
     final start = startAt ?? DateTime.now().add(const Duration(days: 1));
     return Activity(
       id: 'a1',
       title: 'Sunday play',
       description: '',
+      type: type,
       startAt: start,
       endAt: endAt ?? start.add(const Duration(hours: 2)),
       createdById: 'u1',
@@ -82,5 +85,34 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byType(ListTile));
     expect(tapped, isTrue);
+  });
+
+  testWidgets('shows celebration icon for party type', (tester) async {
+    await tester.pumpWidget(
+      wrap(
+        ActivityAgendaTile(
+          activity: buildActivity(type: ActivityType.party),
+          locale: 'en',
+          onTap: () {},
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.byIcon(Icons.celebration), findsOneWidget);
+    expect(find.byIcon(Icons.sports_tennis), findsNothing);
+  });
+
+  testWidgets('shows event icon for other type', (tester) async {
+    await tester.pumpWidget(
+      wrap(
+        ActivityAgendaTile(
+          activity: buildActivity(type: ActivityType.other),
+          locale: 'en',
+          onTap: () {},
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.byIcon(Icons.event), findsOneWidget);
   });
 }

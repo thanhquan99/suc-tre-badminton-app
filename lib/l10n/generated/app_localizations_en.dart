@@ -283,4 +283,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get navUsersLabel => 'Users';
+
+  @override
+  String get activityFieldType => 'Type';
+
+  @override
+  String get activityTypeBadmintonPlay => 'Badminton';
+
+  @override
+  String get activityTypeParty => 'Party';
+
+  @override
+  String get activityTypeOther => 'Other';
+
+  @override
+  String get activityValidationTitleRequiredOther =>
+      'Title is required when type is \'Other\'';
+
+  @override
+  String get activityErrorTitleEditNotAllowed =>
+      'Title can only be edited for type \'Other\'';
 }

@@ -625,6 +625,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Users'**
   String get navUsersLabel;
+
+  /// Label for the activity type segmented selector on the form
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get activityFieldType;
+
+  /// Label for the badminton_play activity type
+  ///
+  /// In en, this message translates to:
+  /// **'Badminton'**
+  String get activityTypeBadmintonPlay;
+
+  /// Label for the party activity type
+  ///
+  /// In en, this message translates to:
+  /// **'Party'**
+  String get activityTypeParty;
+
+  /// Label for the other activity type
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get activityTypeOther;
+
+  /// Validation when type=other and title is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Title is required when type is \'Other\''**
+  String get activityValidationTitleRequiredOther;
+
+  /// Error mapped from server 400 when caller tries to edit title on a built-in type row
+  ///
+  /// In en, this message translates to:
+  /// **'Title can only be edited for type \'Other\''**
+  String get activityErrorTitleEditNotAllowed;
 }
 
 class _AppLocalizationsDelegate

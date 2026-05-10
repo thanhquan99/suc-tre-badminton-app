@@ -5,7 +5,9 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/activities/activities_providers.dart';
+import '../../../core/activities/models/activity_type.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import 'widgets/activity_type_icon.dart';
 import 'widgets/datetime_picker_field.dart';
 import 'widgets/time_picker_field.dart';
 
@@ -34,6 +36,17 @@ class ActivityFormScreen extends ConsumerStatefulWidget {
   bool get isEdit => activityId != null;
   bool get hasPrefilledDate => prefilledDate != null;
 
+  // Canonical default titles. Must match
+  // ACTIVITY_TYPE_DEFAULT_TITLES on the API — sent as a placeholder body
+  // for built-in types; the server overwrites them anyway.
+  static const Map<ActivityType, String> _defaultTitles = {
+    ActivityType.badmintonPlay: 'Badminton Play (Đánh cầu)',
+    ActivityType.party: 'Party (Đi nhậu)',
+    ActivityType.other: '',
+  };
+
+  static String defaultTitleFor(ActivityType t) => _defaultTitles[t] ?? '';
+
   @override
   ConsumerState<ActivityFormScreen> createState() =>
       _ActivityFormScreenState();
@@ -42,6 +55,8 @@ class ActivityFormScreen extends ConsumerStatefulWidget {
 class _ActivityFormScreenState extends ConsumerState<ActivityFormScreen> {
   final _titleController = TextEditingController();
   final _descController = TextEditingController();
+  ActivityType _type = ActivityType.badmintonPlay;
+  String _otherTitleDraft = '';
   DateTime? _startAt;
   DateTime? _endAt;
   bool _saving = false;
@@ -49,6 +64,7 @@ class _ActivityFormScreenState extends ConsumerState<ActivityFormScreen> {
 
   String? _initialTitle;
   String? _initialDesc;
+  ActivityType? _initialType;
   DateTime? _initialStartAt;
   DateTime? _initialEndAt;
 
@@ -68,7 +84,6 @@ class _ActivityFormScreenState extends ConsumerState<ActivityFormScreen> {
 
   static DateTime _defaultStart(DateTime? day) {
     if (day != null) {
-      // 18:00 on the chosen date by default — typical badminton evening slot.
       return DateTime(day.year, day.month, day.day, 18);
     }
     final now = DateTime.now();
@@ -84,18 +99,23 @@ class _ActivityFormScreenState extends ConsumerState<ActivityFormScreen> {
 
   bool get _dirty {
     if (!widget.isEdit) {
+      // Built-in types are dirty as soon as anything else is touched —
+      // but the simplest heuristic is: form is always submittable in create
+      // mode if dates are valid. Title-required check is enforced separately.
+      if (_type != ActivityType.other) return true;
       return _titleController.text.trim().isNotEmpty;
     }
-    return _titleController.text != (_initialTitle ?? '') ||
+    return _type != _initialType ||
+        _titleController.text != (_initialTitle ?? '') ||
         _descController.text != (_initialDesc ?? '') ||
         _startAt != _initialStartAt ||
         _endAt != _initialEndAt;
   }
 
   String? _validateTitle(String? v, AppLocalizations l10n) {
+    if (_type != ActivityType.other) return null;
     final trimmed = v?.trim() ?? '';
-    if (trimmed.isEmpty) return l10n.activityValidationTitleRequired;
-    if (trimmed.length > 100) return null;
+    if (trimmed.isEmpty) return l10n.activityValidationTitleRequiredOther;
     return null;
   }
 
@@ -104,10 +124,35 @@ class _ActivityFormScreenState extends ConsumerState<ActivityFormScreen> {
     return _endAt!.isAfter(_startAt!);
   }
 
+  void _onTypeChanged(ActivityType next) {
+    if (next == _type) return;
+    setState(() {
+      // Stash the current title as the "other draft" only when leaving other.
+      if (_type == ActivityType.other) {
+        _otherTitleDraft = _titleController.text;
+      }
+      _type = next;
+      if (next == ActivityType.other) {
+        _titleController.text = _otherTitleDraft;
+      } else {
+        _titleController.text = ActivityFormScreen.defaultTitleFor(next);
+      }
+    });
+  }
+
   Future<void> _submit() async {
     final l10n = AppLocalizations.of(context);
-    final title = _titleController.text.trim();
-    if (_validateTitle(title, l10n) != null) return;
+
+    final submittedTitle = _type == ActivityType.other
+        ? _titleController.text.trim()
+        : ActivityFormScreen.defaultTitleFor(_type);
+
+    if (_type == ActivityType.other && submittedTitle.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.activityValidationTitleRequiredOther)),
+      );
+      return;
+    }
     if (!_datesValid()) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(l10n.activityValidationEndAfterStart)),
@@ -121,11 +166,17 @@ class _ActivityFormScreenState extends ConsumerState<ActivityFormScreen> {
         final notifier = ref.read(
           updateActivityNotifierProvider(widget.activityId!).notifier,
         );
+        final typeChanged = _type != _initialType;
+        // Only send title when the row is OTHER and title actually changed —
+        // sending title on a built-in row is rejected by the server.
+        final shouldSendTitle = _type == ActivityType.other &&
+            submittedTitle != (_initialTitle ?? '');
         await notifier.save(
-          title: title != _initialTitle ? title : null,
+          title: shouldSendTitle ? submittedTitle : null,
           description: _descController.text != _initialDesc
               ? _descController.text
               : null,
+          type: typeChanged ? _type : null,
           startAt: _startAt != _initialStartAt ? _startAt : null,
           endAt: _endAt != _initialEndAt ? _endAt : null,
         );
@@ -136,10 +187,11 @@ class _ActivityFormScreenState extends ConsumerState<ActivityFormScreen> {
       } else {
         final notifier = ref.read(createActivityNotifierProvider.notifier);
         await notifier.create(
-          title: title,
+          title: submittedTitle,
           description: _descController.text.trim().isEmpty
               ? null
               : _descController.text.trim(),
+          type: _type,
           startAt: _startAt!,
           endAt: _endAt!,
         );
@@ -165,6 +217,15 @@ class _ActivityFormScreenState extends ConsumerState<ActivityFormScreen> {
   }
 
   String _mapError(DioException e, AppLocalizations l10n) {
+    final data = e.response?.data;
+    if (data is Map<String, dynamic>) {
+      final message = data['message'];
+      if (message is String) {
+        if (message.contains('Title can only be edited')) {
+          return l10n.activityErrorTitleEditNotAllowed;
+        }
+      }
+    }
     return l10n.activityErrorGeneric;
   }
 
@@ -184,10 +245,15 @@ class _ActivityFormScreenState extends ConsumerState<ActivityFormScreen> {
             if (!_hydrated) {
               _titleController.text = activity.title;
               _descController.text = activity.description;
+              _type = activity.type;
+              _otherTitleDraft = activity.type == ActivityType.other
+                  ? activity.title
+                  : '';
               _startAt = activity.startAt;
               _endAt = activity.endAt;
               _initialTitle = activity.title;
               _initialDesc = activity.description;
+              _initialType = activity.type;
               _initialStartAt = activity.startAt;
               _initialEndAt = activity.endAt;
               _hydrated = true;
@@ -220,20 +286,55 @@ class _ActivityFormScreenState extends ConsumerState<ActivityFormScreen> {
           _FixedDateBanner(date: fixedDate, locale: locale),
           const SizedBox(height: 16),
         ],
-        TextFormField(
-          controller: _titleController,
-          enabled: !_saving,
-          maxLength: 100,
-          decoration: InputDecoration(
-            labelText: l10n.activityFieldTitle,
-            border: const OutlineInputBorder(),
-          ),
-          validator: (v) => _validateTitle(v, l10n),
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          onChanged: (_) => setState(() {}),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            return DropdownMenu<ActivityType>(
+              width: constraints.maxWidth,
+              initialSelection: _type,
+              enabled: !_saving,
+              requestFocusOnTap: false,
+              enableSearch: false,
+              label: Text(l10n.activityFieldType),
+              leadingIcon: Icon(activityTypeIcon(_type)),
+              inputDecorationTheme: const InputDecorationTheme(
+                border: OutlineInputBorder(),
+              ),
+              dropdownMenuEntries: ActivityType.values
+                  .map(
+                    (t) => DropdownMenuEntry<ActivityType>(
+                      value: t,
+                      label: activityTypeLabel(t, l10n),
+                      leadingIcon: Icon(activityTypeIcon(t)),
+                    ),
+                  )
+                  .toList(),
+              onSelected: _saving
+                  ? null
+                  : (next) {
+                      if (next != null) _onTypeChanged(next);
+                    },
+            );
+          },
         ),
         const SizedBox(height: 12),
+        if (_type == ActivityType.other) ...[
+          TextFormField(
+            key: const ValueKey('activity-title-field'),
+            controller: _titleController,
+            enabled: !_saving,
+            maxLength: 100,
+            decoration: InputDecoration(
+              labelText: l10n.activityFieldTitle,
+              border: const OutlineInputBorder(),
+            ),
+            validator: (v) => _validateTitle(v, l10n),
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            onChanged: (_) => setState(() {}),
+          ),
+          const SizedBox(height: 12),
+        ],
         TextFormField(
+          key: const ValueKey('activity-description-field'),
           controller: _descController,
           enabled: !_saving,
           maxLength: 500,

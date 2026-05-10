@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../core/activities/models/activity.dart';
 import '../../../../l10n/generated/app_localizations.dart';
+import 'activity_type_icon.dart';
 
 class ActivityAgendaTile extends StatelessWidget {
   const ActivityAgendaTile({
@@ -32,7 +33,7 @@ class ActivityAgendaTile extends StatelessWidget {
         leading: CircleAvatar(
           backgroundColor: theme.colorScheme.primaryContainer,
           child: Icon(
-            Icons.sports_tennis,
+            activityTypeIcon(activity.type),
             color: theme.colorScheme.onPrimaryContainer,
           ),
         ),

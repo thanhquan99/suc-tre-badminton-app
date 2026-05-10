@@ -1,6 +1,7 @@
 import 'activity.dart';
 import 'activity_creator.dart';
 import 'activity_participant.dart';
+import 'activity_type.dart';
 
 class ActivityDetail extends Activity {
   final ActivityCreator? createdBy;
@@ -10,6 +11,7 @@ class ActivityDetail extends Activity {
     required super.id,
     required super.title,
     required super.description,
+    required super.type,
     required super.startAt,
     required super.endAt,
     required super.createdById,
@@ -26,6 +28,7 @@ class ActivityDetail extends Activity {
       id: json['id'] as String,
       title: json['title'] as String,
       description: (json['description'] as String?) ?? '',
+      type: ActivityType.fromWire(json['type'] as String?),
       startAt: DateTime.parse(json['startAt'] as String).toLocal(),
       endAt: DateTime.parse(json['endAt'] as String).toLocal(),
       createdById: json['createdById'] as String,
