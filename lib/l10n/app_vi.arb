@@ -87,5 +87,11 @@
   "activityRetryButton": "Thử lại",
   "navHomeLabel": "Trang chủ",
   "navActivitiesLabel": "Hoạt động",
-  "navUsersLabel": "Người dùng"
+  "navUsersLabel": "Người dùng",
+  "activityFieldType": "Loại hoạt động",
+  "activityTypeBadmintonPlay": "Đánh cầu",
+  "activityTypeParty": "Đi nhậu",
+  "activityTypeOther": "Khác",
+  "activityValidationTitleRequiredOther": "Cần nhập tiêu đề khi loại là 'Khác'",
+  "activityErrorTitleEditNotAllowed": "Chỉ có thể sửa tiêu đề khi loại là 'Khác'"
 }

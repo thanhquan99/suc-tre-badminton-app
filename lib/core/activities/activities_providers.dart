@@ -6,6 +6,7 @@ import 'models/activities_page.dart';
 import 'models/activities_query.dart';
 import 'models/activity.dart';
 import 'models/activity_detail.dart';
+import 'models/activity_type.dart';
 
 final activitiesApiClientProvider = Provider<ActivitiesApiClient>((ref) {
   return ActivitiesApiClient(ref.watch(dioProvider));
@@ -30,6 +31,7 @@ class CreateActivityNotifier extends AutoDisposeAsyncNotifier<Activity?> {
   Future<Activity> create({
     required String title,
     String? description,
+    required ActivityType type,
     required DateTime startAt,
     required DateTime endAt,
   }) async {
@@ -39,6 +41,7 @@ class CreateActivityNotifier extends AutoDisposeAsyncNotifier<Activity?> {
       final result = await client.createActivity(
         title: title,
         description: description,
+        type: type,
         startAt: startAt,
         endAt: endAt,
       );
@@ -65,6 +68,7 @@ class UpdateActivityNotifier
   Future<Activity> save({
     String? title,
     String? description,
+    ActivityType? type,
     DateTime? startAt,
     DateTime? endAt,
   }) async {
@@ -75,6 +79,7 @@ class UpdateActivityNotifier
         arg,
         title: title,
         description: description,
+        type: type,
         startAt: startAt,
         endAt: endAt,
       );

@@ -275,5 +275,17 @@
   "navActivitiesLabel": "Activities",
   "@navActivitiesLabel": { "description": "Bottom navigation label for the activities tab" },
   "navUsersLabel": "Users",
-  "@navUsersLabel": { "description": "Bottom navigation label for the admin users tab" }
+  "@navUsersLabel": { "description": "Bottom navigation label for the admin users tab" },
+  "activityFieldType": "Type",
+  "@activityFieldType": { "description": "Label for the activity type segmented selector on the form" },
+  "activityTypeBadmintonPlay": "Badminton",
+  "@activityTypeBadmintonPlay": { "description": "Label for the badminton_play activity type" },
+  "activityTypeParty": "Party",
+  "@activityTypeParty": { "description": "Label for the party activity type" },
+  "activityTypeOther": "Other",
+  "@activityTypeOther": { "description": "Label for the other activity type" },
+  "activityValidationTitleRequiredOther": "Title is required when type is 'Other'",
+  "@activityValidationTitleRequiredOther": { "description": "Validation when type=other and title is empty" },
+  "activityErrorTitleEditNotAllowed": "Title can only be edited for type 'Other'",
+  "@activityErrorTitleEditNotAllowed": { "description": "Error mapped from server 400 when caller tries to edit title on a built-in type row" }
 }

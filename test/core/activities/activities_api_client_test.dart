@@ -1,5 +1,6 @@
 import 'package:badminton_app/core/activities/activities_api_client.dart';
 import 'package:badminton_app/core/activities/models/activities_query.dart';
+import 'package:badminton_app/core/activities/models/activity_type.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
@@ -31,6 +32,56 @@ void main() {
         'participantCount': participantCount,
         'isJoined': isJoined,
       };
+
+  group('list/detail parsing', () {
+    test('list item without type defaults to other', () async {
+      adapter.onGet(
+        '/activities',
+        (server) {
+          server.reply(200, {
+            'data': [sampleListItem()],
+            'total': 1,
+            'page': 1,
+            'limit': 100,
+            'totalPages': 1,
+          });
+        },
+        queryParameters: {
+          'page': 1,
+          'limit': 100,
+          'sortBy': 'startAt',
+          'sortOrder': 'asc',
+        },
+      );
+      final page = await client.listActivities(const ActivitiesQuery());
+      expect(page.data.first.type, ActivityType.other);
+    });
+
+    test('list item with type=party parses correctly', () async {
+      adapter.onGet(
+        '/activities',
+        (server) {
+          server.reply(200, {
+            'data': [
+              {...sampleListItem(), 'type': 'party'},
+            ],
+            'total': 1,
+            'page': 1,
+            'limit': 100,
+            'totalPages': 1,
+          });
+        },
+        queryParameters: {
+          'page': 1,
+          'limit': 100,
+          'sortBy': 'startAt',
+          'sortOrder': 'asc',
+        },
+      );
+      final page = await client.listActivities(const ActivitiesQuery());
+      expect(page.data.first.type, ActivityType.party);
+    });
+  });
 
   group('listActivities', () {
     test('GETs /activities with from/to/page/limit', () async {
@@ -139,7 +190,7 @@ void main() {
   });
 
   group('createActivity', () {
-    test('POSTs body with UTC ISO timestamps', () async {
+    test('POSTs body with type and UTC ISO timestamps', () async {
       adapter.onPost(
         '/activities',
         (server) {
@@ -147,6 +198,7 @@ void main() {
         },
         data: {
           'title': 'Sunday play',
+          'type': 'badminton_play',
           'description': 'Bring water',
           'startAt': '2026-05-08T11:00:00.000Z',
           'endAt': '2026-05-08T13:00:00.000Z',
@@ -156,6 +208,7 @@ void main() {
       final res = await client.createActivity(
         title: 'Sunday play',
         description: 'Bring water',
+        type: ActivityType.badmintonPlay,
         startAt: DateTime.utc(2026, 5, 8, 11),
         endAt: DateTime.utc(2026, 5, 8, 13),
       );
@@ -170,6 +223,7 @@ void main() {
         },
         data: {
           'title': 'Sunday play',
+          'type': 'other',
           'startAt': '2026-05-08T11:00:00.000Z',
           'endAt': '2026-05-08T13:00:00.000Z',
         },
@@ -177,6 +231,29 @@ void main() {
 
       await client.createActivity(
         title: 'Sunday play',
+        type: ActivityType.other,
+        startAt: DateTime.utc(2026, 5, 8, 11),
+        endAt: DateTime.utc(2026, 5, 8, 13),
+      );
+    });
+
+    test('sends type=party', () async {
+      adapter.onPost(
+        '/activities',
+        (server) {
+          server.reply(201, sampleListItem());
+        },
+        data: {
+          'title': 'Party (Đi nhậu)',
+          'type': 'party',
+          'startAt': '2026-05-08T11:00:00.000Z',
+          'endAt': '2026-05-08T13:00:00.000Z',
+        },
+      );
+
+      await client.createActivity(
+        title: 'Party (Đi nhậu)',
+        type: ActivityType.party,
         startAt: DateTime.utc(2026, 5, 8, 11),
         endAt: DateTime.utc(2026, 5, 8, 13),
       );
@@ -214,6 +291,18 @@ void main() {
         startAt: DateTime.utc(2026, 5, 9, 11),
         endAt: DateTime.utc(2026, 5, 9, 13),
       );
+    });
+
+    test('PATCHes only the type field when provided', () async {
+      adapter.onPatch(
+        '/activities/a1',
+        (server) {
+          server.reply(200, sampleListItem());
+        },
+        data: {'type': 'badminton_play'},
+      );
+
+      await client.updateActivity('a1', type: ActivityType.badmintonPlay);
     });
   });
 

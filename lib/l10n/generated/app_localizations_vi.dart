@@ -284,4 +284,24 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get navUsersLabel => 'Người dùng';
+
+  @override
+  String get activityFieldType => 'Loại hoạt động';
+
+  @override
+  String get activityTypeBadmintonPlay => 'Đánh cầu';
+
+  @override
+  String get activityTypeParty => 'Đi nhậu';
+
+  @override
+  String get activityTypeOther => 'Khác';
+
+  @override
+  String get activityValidationTitleRequiredOther =>
+      'Cần nhập tiêu đề khi loại là \'Khác\'';
+
+  @override
+  String get activityErrorTitleEditNotAllowed =>
+      'Chỉ có thể sửa tiêu đề khi loại là \'Khác\'';
 }

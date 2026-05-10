@@ -1,7 +1,10 @@
+import 'activity_type.dart';
+
 class Activity {
   final String id;
   final String title;
   final String description;
+  final ActivityType type;
   final DateTime startAt;
   final DateTime endAt;
   final String createdById;
@@ -12,6 +15,7 @@ class Activity {
     required this.id,
     required this.title,
     required this.description,
+    required this.type,
     required this.startAt,
     required this.endAt,
     required this.createdById,
@@ -24,6 +28,7 @@ class Activity {
       id: json['id'] as String,
       title: json['title'] as String,
       description: (json['description'] as String?) ?? '',
+      type: ActivityType.fromWire(json['type'] as String?),
       startAt: DateTime.parse(json['startAt'] as String).toLocal(),
       endAt: DateTime.parse(json['endAt'] as String).toLocal(),
       createdById: json['createdById'] as String,

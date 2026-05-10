@@ -10,6 +10,7 @@ import '../../../core/auth/auth_notifier.dart';
 import '../../../core/auth/auth_state.dart';
 import '../../../core/auth/models/user_role.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import 'widgets/activity_type_icon.dart';
 import 'widgets/participant_tile.dart';
 
 class ActivityDetailScreen extends ConsumerWidget {
@@ -187,9 +188,29 @@ class _ActivityBodyState extends ConsumerState<_ActivityBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      activityTypeIcon(activity.type),
+                      size: 28,
+                      color: theme.colorScheme.primary,
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        activity.title,
+                        style: theme.textTheme.headlineSmall,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
                 Text(
-                  activity.title,
-                  style: theme.textTheme.headlineSmall,
+                  activityTypeLabel(activity.type, l10n),
+                  style: theme.textTheme.labelMedium?.copyWith(
+                    color: theme.colorScheme.outline,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Row(
